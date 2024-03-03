@@ -1,0 +1,690 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "4.11_Добавить параметры в семейства",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "22e8da8fe3254c6888b464f3b570c925",
+      "Name": "Retry",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "Id": "eaaafd803109456e88e981c5138deec1",
+      "Name": "Параметры",
+      "Type": "string",
+      "Value": "БУДОВА_Позиция_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)",
+      "Description": "Создание строки."
+    },
+    {
+      "Id": "1a2c6cce1a0c47a1b49ab8af44170454",
+      "Name": "Путь к семействам",
+      "Type": "string",
+      "Value": "C:\\1 ИНЖИНИРИНГ\\ОБЪЕКТЫ\\Канатная 122\\E000\\Категории 21\\folder for add shared parameters",
+      "Description": "Создание строки."
+    },
+    {
+      "Id": "8da14a854000445f98b75a3916c23a8a",
+      "Name": "Параметры",
+      "Type": "string",
+      "Value": "Тестовый параметр(16.Тестовая группа,Text,PG_DATA,0)\r\nТестовый параметр2(16.Тестовая группа,Text,PG_TEXT,0)\r\nПараметрППП(16.Тестовая группа,Text,PG_DATA,1)",
+      "Description": "Создание строки."
+    },
+    {
+      "Id": "ef454ddc9cb543a78e221baefb2db412",
+      "Name": "Путь к семействам",
+      "Type": "string",
+      "Value": "C:\\Users\\Александр\\Desktop\\test rfa",
+      "Description": "Создание строки."
+    },
+    {
+      "Id": "b01113c84a3247baae5ca33fa0abb452",
+      "Name": "Параметры",
+      "Type": "string",
+      "Value": "Имя параметра(Имя группы в ФОП,Тип данных в ФОП, Имя группирования в семействе,0=тип  1=экземпляр)",
+      "Description": "Создание строки."
+    },
+    {
+      "Id": "c5036f8fa04c43a999f4f9e500209653",
+      "Name": "Параметры",
+      "Type": "string",
+      "Value": "БУДОВА_Позиция_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Наименование(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Артикул(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Паспортный код изделия(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Производитель(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Единица измерения(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Масса(БУДОВА_01. Универсальные параметры,MASS,PG_DATA,0)\r\nБУДОВА_Масса_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Примечание(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Порядковый номер(БУДОВА_01. Универсальные параметры,NUMBER,PG_DATA,0)\r\nБУДОВА_Количество листов(БУДОВА_03. Информация о проекте и листы,NUMBER,PG_DATA,0)\r\nБУДОВА_Количество фаз(БУДОВА_ЭЛ_Основные,NOOFPOLES,PG_ELECTRICAL,0)\r\nБУДОВА_Активная мощность(БУДОВА_ЭЛ_Основные,DUT_WATTS,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Классификация нагрузок(БУДОВА_ЭЛ_Основные,LOADCLASSIFICATION,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Коэффициент мощности(БУДОВА_ЭЛ_Основные,NUMBER,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Напряжение(БУДОВА_ЭЛ_Основные,ELECTRICAL_POTENTIAL,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Полная мощность(БУДОВА_ЭЛ_Основные,ELECTRICAL_APPARENT_POWER,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Принадлежность(БУДОВА_01. Универсальные параметры,TEXT,PG_TEXT,1)\r\nБУДОВА_Обозначение(БУДОВА_01. Универсальные параметры,TEXT,PG_TEXT,1)\r\n",
+      "Description": "Создание строки."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nimport sys\r\npyt_path = r'C:\\Program Files (x86)\\IronPython 2.7\\Lib'\r\nsys.path.append(pyt_path)\r\nimport os\r\nimport System\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nclr.AddReference(\"RevitAPI\")\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\ncurdoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nfrom System.Collections.Generic import *\r\nclr.AddReference(\"RevitNodes\")\r\nimport sys\r\nimport os\r\nimport Revit\r\nclr.ImportExtensions(Revit.Elements)\r\nimport System\r\ntry:\r\n\tfop = app.OpenSharedParameterFile()\r\nexcept:\r\n\tmessage = \"No Shared Parameter file found.\"\r\n\tpass\t\t\t\r\ndef ParamBindingExists(_doc, _paramName, _paramType):\r\n\tmap = curdoc.ParameterBindings\r\n\titerator = map.ForwardIterator()\r\n\titerator.Reset()\r\n\twhile iterator.MoveNext():\r\n\t\tif iterator.Key != None and iterator.Key.Name == _paramName and iterator.Key.ParameterType == _paramType:\r\n\t\t\tparamExists = True\r\n\t\t\tbreak\r\n\t\telse:\r\n\t\t\tparamExists = False\r\n\treturn paramExists\r\n\r\ndef RemoveParamBinding(_doc, _paramName, _paramType):\r\n\tmap = curdoc.ParameterBindings\r\n\titerator = map.ForwardIterator()\r\n\titerator.Reset()\r\n\twhile iterator.MoveNext():\r\n\t\tif iterator.Key != None and iterator.Key.Name == _paramName and iterator.Key.ParameterType == _paramType:\r\n\t\t\tdefinition = iterator.Key\r\n\t\t\tbreak\r\n\tmessage = None\r\n\tif definition != None:\r\n\t\tmap.Remove(definition)\r\n\t\tmessage = \"Success\"\r\n\treturn message\r\n\t\r\ndef addParam(doc, _paramName, _visible, _instance, _groupName, _paramGroup,k):\r\n\tmessage = None\r\n\tif ParamBindingExists(doc, _paramName, _paramType):\r\n\t\tif not RemoveParamBinding(doc, _paramName, _paramType) == \"Success\":\r\n\t\t\tmessage = \"Param Binding Not Removed Successfully\"\r\n\t\telse:\r\n\t\t\tmessage = None\t\r\n\tgroup = fop.Groups.get_Item(_groupName)\r\n\tcats = app.Create.NewCategorySet()\r\n\t#c = doc.FamilyCategory\r\n\td = doc.Settings.Categories.get_Item(BuiltInCategory.OST_MechanicalEquipment)\r\n\tcats.Insert(d)\r\n\tif _instance==\"1\":\r\n\t\tbind = app.Create.NewInstanceBinding(cats)\r\n\telse:\r\n\t\tbind = app.Create.NewTypeBinding(cats)\r\n\tif group == None:\r\n\t\tgroup = fop.Groups.Create(_groupName)\r\n\tif group.Definitions.Contains(group.Definitions.Item[_paramName]):\r\n\t\t_def = group.Definitions.Item[_paramName]\r\n\telse:\r\n   \t\t_def = group.Definitions.Create(opt)\r\n\treturn _def\r\n\t\r\n_paramName = []\r\n_groupName = []\r\n_paramType = []\r\n_paramType2 = []\r\n_category = []\r\n_category2 = []\r\n_paramGroup = []\r\n_paramGroup2 = []\r\n_instance = []\r\nparameters = IN[2].split(\"\\n\")\r\nfor parameter in parameters:\r\n\ttry:\r\n\t\tif parameter is not None and parameter != \"\":\r\n\t\t\tparamName = parameter[:parameter.find(\"(\")]\r\n\t\t\t_paramName.append(paramName)\r\n\t\t\tattrib = parameter[parameter.find(\"(\")+1:parameter.find(\")\")+1]\r\n\t\t\tgroupName = attrib[:attrib.find(\",\")]\r\n\t\t\tattrib = attrib[attrib.find(\",\")+1:]\r\n\t\t\t_groupName.append(groupName)\r\n\t\t\tparamType = attrib[:attrib.find(\",\")]\r\n\t\t\tattrib = attrib[attrib.find(\",\")+1:]\r\n\t\t\t_paramType2.append(paramType)\r\n\t\t\tparamGroup = attrib[:attrib.find(\",\")]\r\n\t\t\tattrib = attrib[attrib.find(\",\")+1:]\r\n\t\t\t_paramGroup2.append(paramGroup)\r\n\t\t\tinstance = attrib[:attrib.find(\",\")]\r\n\t\t\tattrib = attrib[attrib.find(\",\")+1:]\r\n\t\t\t_instance.append(int(float(instance)))\r\n\texcept:\r\n\t\ta=0\t\r\ntypes=System.Enum.GetValues(ParameterType)\r\nfor i in _paramType2:\r\n\tl=0\r\n\tfor type in types:\r\n\t\tj = type.ToString()\r\n\t\tif i==j:\r\n\t\t\t_paramType.append(type)\r\n\t\t\tl=l+1\r\n\tif l==0:\r\n\t\tfor type in types:\r\n\t\t\tj=type.ToString()\r\n\t\t\tif j==\"Text\":\r\n\t\t\t\t_paramType.append(type)\t\r\ngroups=System.Enum.GetValues(BuiltInParameterGroup)\r\nname=[]\r\nfor i in _paramGroup2:\r\n\tfor group in groups:\r\n\t\tj = group.ToString()\r\n\t\tif j==i:\r\n\t\t\t_paramGroup.append(group)\t\t\t\t\t\r\ndir1 = IN[1]\r\nfiles = os.listdir(dir1)\r\nfile=[]\r\nfor f in files:\r\n\tif \".rfa\" in f and f[-9:-6]!='.00':\r\n\t\tfile.append(f)\t\t\t\t\t\r\n\r\nmygroups = curdoc.Application.OpenSharedParameterFile().Groups\r\ncomment1 = \"\"\r\ncomment2 = []\r\nlist=[]\r\ni=0\r\nwhile i<file.Count:\r\n\tdoc = app.OpenDocumentFile(dir1+ \"\\\\\" +file[i])\r\n\ta1 = dir(doc)\r\n\tTransactionManager.Instance.EnsureInTransaction(doc)\r\n\tj=0\r\n\ta=0\r\n\tb=0\r\n\twhile j<_paramName.Count:\r\n\t\tcheck=0\r\n\t\ttry:\r\n\t\t\tpars = doc.FamilyManager.GetParameters()\r\n\t\t\tfor p in pars:\r\n\t\t\t\tname = p.Definition.Name\r\n\t\t\t\tif name == _paramName[j]:\r\n\t\t\t\t\tpar = p\r\n\t\t\t\t\tcheck=1\t\r\n\t\texcept:\r\n\t\t\t0\r\n\t\tif check == 0:\t\r\n\t\t\ta=a+1\r\n\t\t\tcomment1 = str(a)+\" шт. параметров не было в Файле общих параметров, я их добавил :)\"\r\n\t\t\topt = ExternalDefinitionCreationOptions(_paramName[j], _paramType[j])\r\n\t\t\topt.Visible = True\r\n\t\t\tpar = addParam(doc, _paramName[j],1, _instance[j], _groupName[j], _paramGroup[j],j)\r\n\t\ttry:\r\n\t\t\tpar1 = doc.FamilyManager.AddParameter(par,_paramGroup[j],_instance[j])\r\n\t\t\t#if formula[j] is not None and formula[j]!='':\r\n\t\t\t\t#t = doc.FamilyManager.SetFormula(par1,formula[j])\r\n\t\texcept:\r\n\t\t\tb=b+1\r\n\t\t\t#par1 = doc.FamilyManager.get_Parameter(par)\r\n\t\t\t#if formula[j] is not None and formula[j]!='':\r\n\t\t\t\t#t = doc.FamilyManager.SetFormula(par1,formula[j])\t\r\n\t\tj=j+1\r\n\tcomment2.append(str(b)+\" шт. параметров присутствует в модели, я не смог их добавить :(\")\t\r\n\tTransactionManager.Instance.ForceCloseTransaction()\r\n\tdoc.Close()\r\n\ti=i+1\r\nOUT = comment1,comment2",
+      "VariableInputPorts": true,
+      "Id": "07f21b2b380a4fd8aeece8be60101280",
+      "Inputs": [
+        {
+          "Id": "4a8da56199634749b51d0bdbf4ea81c9",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "21650966b7844ff0b26641dd04681390",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "947996cbf8584c43bbd8fd3830e5843e",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a3fea10d2f714d868694c48f8ab3caf5",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария IronPython."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "22e8da8fe3254c6888b464f3b570c925",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6924a79b26da4e70a7fdfa487733e1e1",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "БУДОВА_Позиция_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)",
+      "Id": "eaaafd803109456e88e981c5138deec1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "07b87c62266141a7a60fa04663d8b1b0",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\1 ИНЖИНИРИНГ\\ОБЪЕКТЫ\\Канатная 122\\E000\\Категории 21\\folder for add shared parameters",
+      "Id": "1a2c6cce1a0c47a1b49ab8af44170454",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9f0d01617b8045afa73a1965d6d7adae",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Тестовый параметр(16.Тестовая группа,Text,PG_DATA,0)\r\nТестовый параметр2(16.Тестовая группа,Text,PG_TEXT,0)\r\nПараметрППП(16.Тестовая группа,Text,PG_DATA,1)",
+      "Id": "8da14a854000445f98b75a3916c23a8a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2ceb69627da34149b23b646ec3b12068",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "C:\\Users\\Александр\\Desktop\\test rfa",
+      "Id": "ef454ddc9cb543a78e221baefb2db412",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e7a90bd581a545b79565103485105911",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Имя параметра(Имя группы в ФОП,Тип данных в ФОП, Имя группирования в семействе,0=тип  1=экземпляр)",
+      "Id": "b01113c84a3247baae5ca33fa0abb452",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f7b131d8ad6d4192ade80a4a869071db",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "БУДОВА_Позиция_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Наименование(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Артикул(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Паспортный код изделия(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Производитель(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Единица измерения(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Масса(БУДОВА_01. Универсальные параметры,MASS,PG_DATA,0)\r\nБУДОВА_Масса_Текст(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Примечание(БУДОВА_01. Универсальные параметры,TEXT,PG_DATA,0)\r\nБУДОВА_Порядковый номер(БУДОВА_01. Универсальные параметры,NUMBER,PG_DATA,0)\r\nБУДОВА_Количество листов(БУДОВА_03. Информация о проекте и листы,NUMBER,PG_DATA,0)\r\nБУДОВА_Количество фаз(БУДОВА_ЭЛ_Основные,NOOFPOLES,PG_ELECTRICAL,0)\r\nБУДОВА_Активная мощность(БУДОВА_ЭЛ_Основные,DUT_WATTS,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Классификация нагрузок(БУДОВА_ЭЛ_Основные,LOADCLASSIFICATION,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Коэффициент мощности(БУДОВА_ЭЛ_Основные,NUMBER,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Напряжение(БУДОВА_ЭЛ_Основные,ELECTRICAL_POTENTIAL,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Полная мощность(БУДОВА_ЭЛ_Основные,ELECTRICAL_APPARENT_POWER,PG_ELECTRICAL_LOADS,0)\r\nБУДОВА_Принадлежность(БУДОВА_01. Универсальные параметры,TEXT,PG_TEXT,1)\r\nБУДОВА_Обозначение(БУДОВА_01. Универсальные параметры,TEXT,PG_TEXT,1)\r\n",
+      "Id": "c5036f8fa04c43a999f4f9e500209653",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fc77b21c96c94d6dae0587210d3af85d",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание строки."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DirectoryObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "620bf2b654eb4cc6aba823ac2ee15057",
+      "Inputs": [
+        {
+          "Id": "30d6abad2f184c499628d0bc3f8fc0d9",
+          "Name": "path",
+          "Description": "Путь к папке.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f7ef282ff16740e89df5af30b4c8d46f",
+          "Name": "directory",
+          "Description": "Папка объекта.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Создание объекта каталога на основе пути"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.IO.FileSystem.GetDirectoryContents@var,string,bool",
+      "Id": "a221391f1fa547aa90c852d8c7503872",
+      "Inputs": [
+        {
+          "Id": "97d065affb7b4819b0861fd91d02630f",
+          "Name": "directory",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1f70ebf565864405a4f8b0b5e2c2b04c",
+          "Name": "searchString",
+          "Description": "string\nЗначение по умолчанию : \"*.*\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "af144f2392b44b4892e20884b86a85d8",
+          "Name": "includeSubdirectories",
+          "Description": "bool\nЗначение по умолчанию : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ff4097f787fb4c799d828e9f44a3acbb",
+          "Name": "files",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c8526e6431f340e989aa2f04cee091af",
+          "Name": "directories",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "FileSystem.GetDirectoryContents (directory: var, searchString: string = \"*.*\", includeSubdirectories: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "#---------------------Filter *.rfa files-------------------------\r\nfile=[]\r\nfor f in IN[0]:\r\n\tif \".rfa\" in f and f[-9:-6]!='.00': #do not load backup files\r\n\t\tfile.append(f)\r\nOUT=file",
+      "VariableInputPorts": true,
+      "Id": "29604b37275c43f8be9f0581d37ea539",
+      "Inputs": [
+        {
+          "Id": "6440b4af47e6423abe6005f4411817a9",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "37fe6e54720449fb98b19c461b876e14",
+          "Name": "OUT",
+          "Description": "Результат сценария Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выполнение встроенного сценария IronPython."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": "C:\\1 ИНЖИНИРИНГ\\ОБЪЕКТЫ\\Канатная 122\\E000\\Категории 21\\folder for add shared parameters",
+      "InputValue": "C:\\1 ИНЖИНИРИНГ\\ОБЪЕКТЫ\\Канатная 122\\E000\\Категории 21\\folder for add shared parameters",
+      "NodeType": "ExtensionNode",
+      "Id": "dfa2b29e69f6440eacff984569ceda47",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d574d09aecd64a908ff51624832a3dd1",
+          "Name": "",
+          "Description": "Directory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Позволяет выбрать папку в системе и получить путь к ней"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": null,
+      "InputValue": "C:\\1 ИНЖИНИРИНГ\\ОБЪЕКТЫ\\Канатная 122\\E000\\Категории 21\\folder for add shared parameters\\Автомат 2р в боксе",
+      "NodeType": "ExtensionNode",
+      "Id": "f1eaf54e94fe48e39bd3dd00c6625866",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "946cc40f843246c893bc8deab908363e",
+          "Name": "",
+          "Description": "Directory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Позволяет выбрать папку в системе и получить путь к ней"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "6924a79b26da4e70a7fdfa487733e1e1",
+      "End": "4a8da56199634749b51d0bdbf4ea81c9",
+      "Id": "9b366373a1e941aca3de4470d609ffc8"
+    },
+    {
+      "Start": "fc77b21c96c94d6dae0587210d3af85d",
+      "End": "947996cbf8584c43bbd8fd3830e5843e",
+      "Id": "d6e9aaf6b66f484481dc50b87dea3e49"
+    },
+    {
+      "Start": "f7ef282ff16740e89df5af30b4c8d46f",
+      "End": "97d065affb7b4819b0861fd91d02630f",
+      "Id": "312f669fff794290b3e6932032c93408"
+    },
+    {
+      "Start": "ff4097f787fb4c799d828e9f44a3acbb",
+      "End": "6440b4af47e6423abe6005f4411817a9",
+      "Id": "7cda4f506d65473ab5d1e89b03cace9f"
+    },
+    {
+      "Start": "d574d09aecd64a908ff51624832a3dd1",
+      "End": "21650966b7844ff0b26641dd04681390",
+      "Id": "a7fe36c742674327a3ccded59bd4a872"
+    },
+    {
+      "Start": "946cc40f843246c893bc8deab908363e",
+      "End": "30d6abad2f184c499628d0bc3f8fc0d9",
+      "Id": "4d3c665a8bf745f0945fd5ee7094a790"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.6.1.8786",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "07f21b2b380a4fd8aeece8be60101280",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1261.09602300256,
+        "Y": 826.562518683429
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Retry",
+        "Id": "22e8da8fe3254c6888b464f3b570c925",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 946.320490932383,
+        "Y": 706.480626205258
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Параметры",
+        "Id": "eaaafd803109456e88e981c5138deec1",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 799.93548624794346,
+        "Y": 1049.6967136162727
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Путь к семействам",
+        "Id": "1a2c6cce1a0c47a1b49ab8af44170454",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 795.15671285648966,
+        "Y": 922.350604426855
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Параметры",
+        "Id": "8da14a854000445f98b75a3916c23a8a",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 449.9684520888452,
+        "Y": 1368.7353818910815
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Путь к семействам",
+        "Id": "ef454ddc9cb543a78e221baefb2db412",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 449.19318540144423,
+        "Y": 1293.8953585162783
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Параметры",
+        "Id": "b01113c84a3247baae5ca33fa0abb452",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 419.23696154077959,
+        "Y": 1556.913057953534
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Параметры",
+        "Id": "c5036f8fa04c43a999f4f9e500209653",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 793.76052744458707,
+        "Y": 1175.3677934820259
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory From Path",
+        "Id": "620bf2b654eb4cc6aba823ac2ee15057",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -324.5731206879268,
+        "Y": 1010.9802888651831
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FileSystem.GetDirectoryContents",
+        "Id": "a221391f1fa547aa90c852d8c7503872",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -118.8984318557695,
+        "Y": 1016.5880316661
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "29604b37275c43f8be9f0581d37ea539",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 246.9403109897919,
+        "Y": 1032.2512511030059
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory Path",
+        "Id": "dfa2b29e69f6440eacff984569ceda47",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 348.78706796934421,
+        "Y": 724.27798443016343
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory Path",
+        "Id": "f1eaf54e94fe48e39bd3dd00c6625866",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": -794.105829016668,
+        "Y": 1010.29612075627
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "e7b2002982184b329f7841c84c7b1685",
+        "Title": "work",
+        "Nodes": [
+          "07f21b2b380a4fd8aeece8be60101280"
+        ],
+        "Left": 1251.09602300256,
+        "Top": 796.562518683429,
+        "Width": 144.0,
+        "Height": 175.0,
+        "FontSize": 14.0,
+        "InitialTop": 826.562518683429,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FFB5B5B5"
+      },
+      {
+        "Id": "19cb42630af64297bbdb45a390d687f1",
+        "Title": "Заполните параметры\r\nПуть должен быть без кавычек",
+        "Nodes": [
+          "eaaafd803109456e88e981c5138deec1",
+          "1a2c6cce1a0c47a1b49ab8af44170454"
+        ],
+        "Left": 785.15671285648966,
+        "Top": 878.350604426855,
+        "Width": 225.7787733914538,
+        "Height": 270.34610918941769,
+        "FontSize": 14.0,
+        "InitialTop": 922.350604426855,
+        "InitialHeight": 272.34610918941769,
+        "TextblockHeight": 34.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0f333384a4184a1eb94f54234f7505dd",
+        "Title": "Заполните параметры",
+        "Nodes": [
+          "8da14a854000445f98b75a3916c23a8a",
+          "ef454ddc9cb543a78e221baefb2db412"
+        ],
+        "Left": 439.19318540144423,
+        "Top": 1263.8953585162783,
+        "Width": 239.77526668740097,
+        "Height": 268.8400233748032,
+        "FontSize": 14.0,
+        "InitialTop": 1293.8953585162783,
+        "InitialHeight": 219.8400233748032,
+        "TextblockHeight": 20.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0a5cf0ee273a494296e919339a88f487",
+        "Title": "Выбираем путь к папке с семействами (не должен содержать вложенных папок)",
+        "Nodes": [
+          "dfa2b29e69f6440eacff984569ceda47"
+        ],
+        "Left": 338.78706796934421,
+        "Top": 541.27798443016343,
+        "Width": 374.0,
+        "Height": 277.0,
+        "FontSize": 36.0,
+        "InitialTop": 724.27798443016343,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 173.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0b1556c26f7645f19e8e41184026cb67",
+        "Title": "Выбираем путь к семействам и python отфильтровывает файлы с .00 (бэкапы семейств)",
+        "Nodes": [
+          "620bf2b654eb4cc6aba823ac2ee15057",
+          "a221391f1fa547aa90c852d8c7503872",
+          "29604b37275c43f8be9f0581d37ea539",
+          "f1eaf54e94fe48e39bd3dd00c6625866"
+        ],
+        "Left": -804.105829016668,
+        "Top": 914.29612075627,
+        "Width": 1185.04614000646,
+        "Height": 247.29191090983,
+        "FontSize": 36.0,
+        "InitialTop": 1010.29612075627,
+        "InitialHeight": 166.95513034673581,
+        "TextblockHeight": 86.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -483.69066633762782,
+    "Y": -505.32513244289976,
+    "Zoom": 0.77635313925353477
+  }
+}

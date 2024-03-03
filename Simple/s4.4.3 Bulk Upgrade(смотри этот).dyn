@@ -1,0 +1,407 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "s4.4.3 Bulk Upgrade(смотри этот)",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "0ce0561273d24d2cb62f8516fcb19125",
+      "Name": "Boolean",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "Id": "3b363d5a7492473ca762c3b600522cc2",
+      "Name": "Directory Path",
+      "Type": "string",
+      "Value": "O:\\REVIT\\2018\\Families\\Annotation",
+      "Description": "Позволяет выбрать папку в системе и получить путь к ней"
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "0ce0561273d24d2cb62f8516fcb19125",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4647fed6a79b4f82811fadcb0757d5b7",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Выбор между значениями true и false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": "O:\\REVIT\\2018\\Families\\Profiles",
+      "InputValue": "O:\\REVIT\\2018\\Families\\Annotation",
+      "NodeType": "ExtensionNode",
+      "Id": "3b363d5a7492473ca762c3b600522cc2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "39ded130f3234c02b0119a1548f64ed9",
+          "Name": "",
+          "Description": "Directory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Позволяет выбрать папку в системе и получить путь к ней"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "2276a44a-c7cc-4438-ac43-2ae6b821d4c9",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "de830b16b021499888058922799029d0",
+      "Inputs": [
+        {
+          "Id": "31b861cc52de49b1a80aabca08f09e01",
+          "Name": "directoryPath",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "374fdfd952fc4277af809c2052d0ac74",
+          "Name": "searchString",
+          "Description": "string\nЗначение по умолчанию : \"*\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "37fe3cd1468b4e9fa89ad8409e61d997",
+          "Name": "files",
+          "Description": "возвращаемое значение",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Unlike the built-in node Directory.Contents, this node browses a directory recursively and returns all relevant files contained in subfolders as well."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"*.rfa\";",
+      "Id": "8e056245d38446af9f08e60ccf2218b3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "06ff4f9980844290ac010192964dc4d0",
+          "Name": "",
+          "Description": "Значение выражения в строке 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Обеспечивает возможность непосредственного авторства кода DesignScript"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Applications.OpenDocumentFile@string,bool,bool,bool,bool",
+      "Id": "5730a59c8e2544d8a32a3bb9ad38b906",
+      "Inputs": [
+        {
+          "Id": "3bde5c127a974c7198597ee203ed0865",
+          "Name": "filePath",
+          "Description": "The file to obtain document from.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1357893f951743c2a99dd3ebf54b86e5",
+          "Name": "audit",
+          "Description": "Choose whether or not to audit the file upon opening. (Will run slower with this)\n\nbool\nЗначение по умолчанию : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e15992ee3d8f4bf7903645684431aecb",
+          "Name": "detachFromCentral",
+          "Description": "Choose whether or not to detach from central upon opening. Only for RVT files.\n\nbool\nЗначение по умолчанию : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7084385e9fa34bfa93cb6294d68dadac",
+          "Name": "preserveWorksets",
+          "Description": "Choose whether or not to preserve worksets upon opening. Only for RVT files.\n\nbool\nЗначение по умолчанию : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1ce5ba21c5f040fdacc0407b0c17f9f0",
+          "Name": "closeAllWorksets",
+          "Description": "Choose if you want to close all worksets upon opening. Defaulted to false.\n\nbool\nЗначение по умолчанию : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2b1b2216bc4647c59fbf0e9974030dfc",
+          "Name": "document",
+          "Description": "The document object. If the file path is blank this returns the current document.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will open the given file in the background.\n\nApplications.OpenDocumentFile (filePath: string, audit: bool = false, detachFromCentral: bool = false, preserveWorksets: bool = true, closeAllWorksets: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Applications.CloseDocument@var,bool",
+      "Id": "880ee034082e4257b03ecc15c0dfba70",
+      "Inputs": [
+        {
+          "Id": "5c78fe41499249069f0c6d3e0f362d7c",
+          "Name": "document",
+          "Description": "The background opened document object, (preferably this is the title as obtained with Applications.OpenDocumentFile from Rhythm).\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "999c5b57941246ddb85b6b88ca1481d4",
+          "Name": "save",
+          "Description": "Do you want to save?\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3ca646c5a57b4b799898fd7c3546e4b0",
+          "Name": "result",
+          "Description": "Did it work?",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will close the given document with the option to save.\n\nApplications.CloseDocument (document: var, save: bool): string"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "4647fed6a79b4f82811fadcb0757d5b7",
+      "End": "999c5b57941246ddb85b6b88ca1481d4",
+      "Id": "084a7b493fe04ddc9f6c0d138f710209"
+    },
+    {
+      "Start": "39ded130f3234c02b0119a1548f64ed9",
+      "End": "31b861cc52de49b1a80aabca08f09e01",
+      "Id": "cff26c6a25594c97bdd951a8fc197af6"
+    },
+    {
+      "Start": "37fe3cd1468b4e9fa89ad8409e61d997",
+      "End": "3bde5c127a974c7198597ee203ed0865",
+      "Id": "5843b000cc5d48989e7a5ff4d5efd161"
+    },
+    {
+      "Start": "06ff4f9980844290ac010192964dc4d0",
+      "End": "374fdfd952fc4277af809c2052d0ac74",
+      "Id": "b51fb285b3a24308897a3b6bc0c17490"
+    },
+    {
+      "Start": "2b1b2216bc4647c59fbf0e9974030dfc",
+      "End": "5c78fe41499249069f0c6d3e0f362d7c",
+      "Id": "fcf202deb6cb44e5a715b3dc7a64951c"
+    }
+  ],
+  "Dependencies": [
+    "2276a44a-c7cc-4438-ac43-2ae6b821d4c9"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 1.x",
+      "Version": "1.34.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "de830b16b021499888058922799029d0"
+      ]
+    },
+    {
+      "Name": "Rhythm",
+      "Version": "2021.12.1",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "5730a59c8e2544d8a32a3bb9ad38b906",
+        "880ee034082e4257b03ecc15c0dfba70"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.10.1.3976",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Фоновый просмотр",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "0ce0561273d24d2cb62f8516fcb19125",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 872.3948853808771,
+        "Y": 192.4512114465866
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory Path",
+        "Id": "3b363d5a7492473ca762c3b600522cc2",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -241.78212733211353,
+        "Y": 1.1438795653369738
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory.Contents+",
+        "Id": "de830b16b021499888058922799029d0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 134.41027492589046,
+        "Y": 21.15289171748924
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "8e056245d38446af9f08e60ccf2218b3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -110.27257901598352,
+        "Y": 151.53720063747193
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|Applications.OpenDocumentFile",
+        "Id": "5730a59c8e2544d8a32a3bb9ad38b906",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 550.03674537243455,
+        "Y": 30.221827243431335
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|Applications.CloseDocument",
+        "Id": "880ee034082e4257b03ecc15c0dfba70",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1042.4260005621372,
+        "Y": 31.732114054561407
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "14b3360d7c9b4059a025ea222ee8b5eb",
+        "Title": "Rhythm Package",
+        "Nodes": [
+          "880ee034082e4257b03ecc15c0dfba70",
+          "5730a59c8e2544d8a32a3bb9ad38b906",
+          "0ce0561273d24d2cb62f8516fcb19125"
+        ],
+        "Left": 540.03674537243455,
+        "Top": -15.778172756568665,
+        "Width": 782.38925518970268,
+        "Height": 276.22938420315529,
+        "FontSize": 30.0,
+        "InitialTop": 30.221827243431335,
+        "InitialHeight": 149.0,
+        "TextblockHeight": 36.0,
+        "Background": "#FFD4B6DB"
+      },
+      {
+        "Id": "fd3c34da08a44a00ade90219a2b45102",
+        "Title": "Clockwork Package",
+        "Nodes": [
+          "de830b16b021499888058922799029d0"
+        ],
+        "Left": 124.41027492589046,
+        "Top": -60.84710828251076,
+        "Width": 245.0,
+        "Height": 201.0,
+        "FontSize": 30.0,
+        "InitialTop": 21.15289171748924,
+        "InitialHeight": 149.0,
+        "TextblockHeight": 72.0,
+        "Background": "#FFFFAA45"
+      }
+    ],
+    "X": 448.93560767822549,
+    "Y": 114.39458673526116,
+    "Zoom": 0.46311093481283783
+  }
+}
